@@ -72,6 +72,9 @@ def delete_task(task_id) :
 
 
 def main() :
+    
+    print("Enter -h or --help for instructions")
+    print("eg : python <filename> -h")
     parser = argparse.ArgumentParser(
         prog = "todo",
         
@@ -84,7 +87,9 @@ def main() :
             python todo.py add "Buy groceries"
             python todo.py status 1 in-progress
             python todo.py list --status done
-        """
+        """,
+        
+          formatter_class=argparse.RawDescriptionHelpFormatter 
     )
     subparser = parser.add_subparsers(title="AVAILABLE COMMANDS", dest = "command")
     
@@ -95,7 +100,7 @@ def main() :
     
     subparser.add_parser("list-tasks", help = "List all tasks based on their status").add_argument("status", type = str, nargs = "?")
     
-    status_parser = subparser.add_parser("change-status")
+    status_parser = subparser.add_parser("change-status", help = "update status of an existing task")
     status_parser.add_argument("id", type = int)
     status_parser.add_argument("status", type = str)
     
